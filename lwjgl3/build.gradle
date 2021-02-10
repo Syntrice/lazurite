@@ -1,0 +1,30 @@
+apply plugin: 'application'
+ext.projectName = 'lwjgl3'
+// Set resource directory
+sourceSets.main.resources.srcDirs += [ rootProject.file('assets').path ]
+
+mainClassName = 'com.syntrice.lazurite.lwjgl3.Lwjgl3Launcher'
+
+import org.gradle.internal.os.OperatingSystem
+
+run {
+	workingDir = rootProject.file('assets').path
+	setIgnoreExitValue(true)
+	
+	if (OperatingSystem.current() == OperatingSystem.MAC_OS) {
+		// Required to run LWJGL3 Java apps on MacOS
+		jvmArgs += "-XstartOnFirstThread"
+	}
+}
+jar {
+	archiveBaseName = appName
+	dependsOn configurations.runtimeClasspath
+	from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } } 
+	manifest {
+		attributes 'Main-Class': project.mainClassName
+	}
+	doLast {
+		file(archivePath).setExecutable(true, false)
+	}
+}
+

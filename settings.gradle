@@ -1,0 +1,14 @@
+rootProject.name = 'lazurite'
+include 'lwjgl3', 'core'
+
+String rozeniteLocalPath = "../rozenite"
+if (new File(rozeniteLocalPath).exists()) {
+    println "Found a local version of dependency Rozenite - using as substitution"
+    includeBuild(rozeniteLocalPath) {
+        dependencySubstitution {
+            substitute module('com.github.Syntrice.rozenite:graphics:master-SNAPSHOT') with project(':graphics')
+            substitute module('com.github.Syntrice.rozenite:utility:master-SNAPSHOT') with project(':utility')
+        }
+    }
+}
+
