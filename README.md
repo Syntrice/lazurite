@@ -1,3 +1,5 @@
+<img src="https://i.imgur.com/kmAgC6l.png">
+
 # Lazurite
 
 A personl project made with [libGDX](https://libgdx.com/). It is an experimental project developed alongside [Rozenite](https://github.com/Syntrice/rozenite).
